@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainRecord">
+
+    <fragment
+        android:id="@+id/mainRecord"
+        android:name="com.borbi.boogiemeter.mainRecord.MainRecordFragment"
+        android:label="fragment_main_record"
+        tools:layout="@layout/fragment_main_record" >
+        <action
+            android:id="@+id/action_mainRecord_to_recording"
+            app:destination="@id/recording" />
+    </fragment>
+    <fragment
+        android:id="@+id/recording"
+        android:name="com.borbi.boogiemeter.recording.RecordingFragment"
+        android:label="fragment_recording"
+        tools:layout="@layout/fragment_recording" />
+</navigation>
