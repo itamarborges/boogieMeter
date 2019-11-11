@@ -11,7 +11,6 @@ class MainRecordViewModel : ViewModel() {
     val navigateToRecording: LiveData<Boolean?>
         get() = _navigateToRecording
 
-
     fun moveToRecording() {
         _navigateToRecording.value = true
     }
