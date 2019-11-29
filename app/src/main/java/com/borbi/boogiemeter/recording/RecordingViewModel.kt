@@ -20,7 +20,6 @@ import kotlin.math.abs
 class RecordingViewModel(application: Application)  : AndroidViewModel(application), SensorEventListener {
 
     private lateinit var boogieSensorManager: BoogieSensorManager
-    private var _gyroscopeContent: ObservableField<String> = ObservableField("")
     private var _accelerometerContent: ObservableField<String> = ObservableField("")
     private var _jumps: ObservableInt = ObservableInt(0)
     private var startAJumping = false
@@ -28,12 +27,7 @@ class RecordingViewModel(application: Application)  : AndroidViewModel(applicati
     private var startBJumping = false
     private var endBJumping = false
 
-    var absX: ObservableFloat = ObservableFloat(0f)
-
-    val gyroscopeContent : ObservableField<String>
-        get() = _gyroscopeContent
-
-    val accelerometerContent : ObservableField<String>
+     val accelerometerContent : ObservableField<String>
         get() = _accelerometerContent
 
     val jumpsContent : ObservableInt
@@ -42,9 +36,6 @@ class RecordingViewModel(application: Application)  : AndroidViewModel(applicati
     init {
         boogieSensorManager = BoogieSensorManager(application)
         boogieSensorManager?.also {
-            it.sensorGyroscope?.also { service ->
-                it.sensorManager.registerListener(this, service, SensorManager.SENSOR_DELAY_NORMAL)
-            }
 
             it.sensorAccelerometer?.also { service ->
                 it.sensorManager.registerListener(this, service, SensorManager.SENSOR_DELAY_NORMAL)
@@ -63,21 +54,12 @@ class RecordingViewModel(application: Application)  : AndroidViewModel(applicati
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
-        Log.d("sensor", event.toString());
-
-        if (event?.sensor == boogieSensorManager.sensorGyroscope) {
-            _gyroscopeContent?.set("X: "+event?.values?.get(0).toString() +
-                              " Y:" +event?.values?.get(1).toString() +
-                              " Z:" +event?.values?.get(2).toString())
-        }
 
         if (event?.sensor == boogieSensorManager.sensorAccelerometer) {
             _accelerometerContent?.set("X: "+event?.values?.get(0).toString() +
                     " Y:" +event?.values?.get(1).toString() +
                     " Z:" +event?.values?.get(2).toString())
 
-
-            absX.set(abs(event?.values?.get(1)!!))
 
             if (abs(event?.values?.get(1)!!) > 11 && !startAJumping) {
                 startAJumping = true
@@ -96,6 +78,7 @@ class RecordingViewModel(application: Application)  : AndroidViewModel(applicati
             }
 
             if (startAJumping && endAJumping && startBJumping && endBJumping) {
+                Log.d("jump", event.timestamp.toString());
                 _jumps.set(_jumps.get()+1)
                 startAJumping = false
                 endAJumping = false
