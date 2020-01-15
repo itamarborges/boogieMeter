@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat.getSystemService
 
 class BoogieSensorManager(application: Application) {
 
-    public lateinit var sensorManager: SensorManager
+    public var sensorManager: SensorManager
     var sensorGyroscope: Sensor? = null
     var sensorAccelerometer: Sensor? = null
 

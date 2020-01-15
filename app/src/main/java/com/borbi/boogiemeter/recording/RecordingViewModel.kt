@@ -19,13 +19,14 @@ import kotlin.math.abs
 
 class RecordingViewModel(application: Application)  : AndroidViewModel(application), SensorEventListener {
 
-    private lateinit var boogieSensorManager: BoogieSensorManager
+    private var boogieSensorManager: BoogieSensorManager
     private var _accelerometerContent: ObservableField<String> = ObservableField("")
     private var _jumps: ObservableInt = ObservableInt(0)
     private var startAJumping = false
     private var endAJumping = false
     private var startBJumping = false
     private var endBJumping = false
+    private var _sumContent: ObservableField<String> = ObservableField("")
 
      val accelerometerContent : ObservableField<String>
         get() = _accelerometerContent
@@ -33,9 +34,12 @@ class RecordingViewModel(application: Application)  : AndroidViewModel(applicati
     val jumpsContent : ObservableInt
         get() = _jumps
 
+    val sumContent : ObservableField<String>
+        get() = _sumContent
+
     init {
         boogieSensorManager = BoogieSensorManager(application)
-        boogieSensorManager?.also {
+        boogieSensorManager.also {
 
             it.sensorAccelerometer?.also { service ->
                 it.sensorManager.registerListener(this, service, SensorManager.SENSOR_DELAY_NORMAL)
@@ -56,25 +60,31 @@ class RecordingViewModel(application: Application)  : AndroidViewModel(applicati
     override fun onSensorChanged(event: SensorEvent?) {
 
         if (event?.sensor == boogieSensorManager.sensorAccelerometer) {
-            _accelerometerContent?.set("X: "+event?.values?.get(0).toString() +
+            _accelerometerContent.set("X: "+event?.values?.get(0).toString() +
                     " Y:" +event?.values?.get(1).toString() +
                     " Z:" +event?.values?.get(2).toString())
 
+            _sumContent.set((abs(event?.values?.get(0)!!) +abs(event.values?.get(1)!!) + abs(event.values?.get(2)!!)).toString());
 
-            if (abs(event?.values?.get(1)!!) > 11 && !startAJumping) {
+
+            if (abs(event.values?.get(1)!!) > 11 && !startAJumping) {
                 startAJumping = true
+                Log.d("zzz0", event.values?.get(1).toString());
             }
 
-            if (abs(event?.values?.get(1)!!) < 8 && startAJumping) {
+            if (abs(event.values?.get(1)!!) < 8 && startAJumping) {
                 endAJumping = true
+                Log.d("zzz1", event.values?.get(1).toString());
             }
 
-            if (abs(event?.values?.get(1)!!) > 11 && endAJumping) {
+            if (abs(event.values?.get(1)!!) > 11 && endAJumping) {
                 startBJumping = true
+                Log.d("zzz2", event.values?.get(1).toString());
             }
 
-            if (abs(event?.values?.get(1)!!) < 8 && startBJumping) {
+            if (abs(event.values?.get(1)!!) < 8 && startBJumping) {
                 endBJumping = true
+                Log.d("zzz3", event.values?.get(1).toString());
             }
 
             if (startAJumping && endAJumping && startBJumping && endBJumping) {
