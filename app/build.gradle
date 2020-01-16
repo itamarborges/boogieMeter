@@ -17,6 +17,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -46,6 +47,8 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+
+    implementation 'com.android.support:multidex:1.0.3'
 
 
 }
