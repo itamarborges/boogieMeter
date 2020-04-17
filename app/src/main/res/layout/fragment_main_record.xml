@@ -14,23 +14,31 @@
         android:layout_height="match_parent"
         tools:context="com.borbi.boogiemeter.mainRecord.MainRecordFragment">
 
-         <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"
-            tools:layout_editor_absoluteX="-16dp"
-            tools:layout_editor_absoluteY="62dp" />
-
         <Button
             android:id="@+id/button"
             android:layout_width="130dp"
             android:layout_height="51dp"
-            android:text="@string/start_recording"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            android:onClick="@{() -> mainRecordViewModel.moveToRecording()}"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginBottom="32dp"
+            android:onClick="@{() -> mainRecordViewModel.moveToEvent()}"
+            android:text="@string/add_new_event"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/events_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/events"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

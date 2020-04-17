@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.borbi.boogiemeter.R
 import com.borbi.boogiemeter.databinding.FragmentMainRecordBinding
@@ -31,10 +30,10 @@ class MainRecordFragment : Fragment() {
 
         binding.mainRecordViewModel = viewModel
 
-        viewModel.navigateToRecording.observe(this, Observer {
+        viewModel.navigateToEvent.observe(this, Observer {
             if (it == true) { // Observed state is true.
-                this.findNavController().navigate(MainRecordFragmentDirections.actionMainRecordToRecording())
-                viewModel.doneMoveToRecording()
+                this.findNavController().navigate(MainRecordFragmentDirections.actionMainRecordToEventFragment())
+                viewModel.doneMoveToEvent()
             }
         })
 

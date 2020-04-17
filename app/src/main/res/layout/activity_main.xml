@@ -7,10 +7,11 @@
 
     </data>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
+
 
         <fragment
             android:layout_width="match_parent"
@@ -20,5 +21,5 @@
             app:navGraph="@navigation/nav_graph"
             app:defaultNavHost="true" />
 
-    </FrameLayout>
+    </LinearLayout>
 </layout>
