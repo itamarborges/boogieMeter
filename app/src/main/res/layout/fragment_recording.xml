@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="RecordingViewModel"
+            name="recordingViewModel"
             type="com.borbi.boogiemeter.recording.RecordingViewModel" />
     </data>
 
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="@{String.valueOf(RecordingViewModel.jumpsContent)}"
+            android:text="@{String.valueOf(recordingViewModel.jumpsContent)}"
             android:textSize="80sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="@{String.valueOf(RecordingViewModel.accelerometerContent)}"
+            android:text="@{String.valueOf(recordingViewModel.accelerometerContent)}"
             android:textSize="36sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -96,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="@{String.valueOf(RecordingViewModel.sumContent)}"
+            android:text="@{String.valueOf(recordingViewModel.sumContent)}"
             android:textSize="80sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -114,6 +114,7 @@
             android:layout_marginRight="32dp"
             android:background="#7AF44336"
             android:text="@string/stop_recording"
+            android:onClick="@{() -> recordingViewModel.moveToMainRecord()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

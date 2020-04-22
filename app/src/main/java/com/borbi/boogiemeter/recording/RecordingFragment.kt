@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.borbi.boogiemeter.R
 import com.borbi.boogiemeter.databinding.FragmentMainRecordBinding
 import com.borbi.boogiemeter.databinding.FragmentRecordingBinding
@@ -35,6 +37,13 @@ class RecordingFragment : Fragment() {
                 inflater, R.layout.fragment_recording, container, false)
 
         binding.recordingViewModel = viewModel
+
+        viewModel.navigateToMainRecord.observe(this, Observer {
+            if (it == true) { // Observed state is true.
+                this.findNavController().navigate(RecordingFragmentDirections.actionRecordingToMainRecord())
+                viewModel.doneMoveToMainRecord()
+            }
+        })
 
         return binding.root
     }

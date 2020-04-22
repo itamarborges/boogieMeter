@@ -8,9 +8,7 @@ import android.hardware.SensorManager
 import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.borbi.boogiemeter.sensors.BoogieSensorManager
 import kotlin.math.abs
 
@@ -24,6 +22,19 @@ class RecordingViewModel(application: Application)  : AndroidViewModel(applicati
     private var startJumpDown = false
     private var endJumpDown = false
     private var _sumContent: ObservableField<String> = ObservableField("")
+
+    private val _navigateToMainRecord = MutableLiveData<Boolean?>()
+
+    val navigateToMainRecord: LiveData<Boolean?>
+        get() = _navigateToMainRecord
+
+    fun moveToMainRecord() {
+        _navigateToMainRecord.value = true
+    }
+
+    fun doneMoveToMainRecord() {
+        _navigateToMainRecord.value = false
+    }
 
      val accelerometerContent : ObservableField<String>
         get() = _accelerometerContent
