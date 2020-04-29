@@ -14,4 +14,6 @@
     <string name="jumping_time">Jumping Time:</string>
     <string name="events">Events</string>
     <string name="stop_recording">Stop Recording</string>
+    <string name="ok">Ok</string>
+    <string name="summary">Summary</string>
 </resources>

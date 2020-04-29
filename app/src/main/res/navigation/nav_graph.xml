@@ -20,8 +20,8 @@
         android:label="fragment_recording"
         tools:layout="@layout/fragment_recording" >
         <action
-            android:id="@+id/action_recording_to_mainRecord"
-            app:destination="@id/mainRecord" />
+            android:id="@+id/action_recording_to_summaryFragment"
+            app:destination="@id/summaryFragment" />
     </fragment>
     <fragment
         android:id="@+id/eventFragment"
@@ -31,5 +31,14 @@
         <action
             android:id="@+id/action_eventFragment_to_recording"
             app:destination="@id/recording" />
+    </fragment>
+    <fragment
+        android:id="@+id/summaryFragment"
+        android:name="com.borbi.boogiemeter.summary.SummaryFragment"
+        tools:layout="@layout/fragment_summary"
+        android:label="SummaryFragment" >
+        <action
+            android:id="@+id/action_summaryFragment_to_mainRecord"
+            app:destination="@id/mainRecord" />
     </fragment>
 </navigation>
