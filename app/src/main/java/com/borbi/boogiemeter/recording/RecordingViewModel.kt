@@ -10,6 +10,7 @@ import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.*
 import com.borbi.boogiemeter.sensors.BoogieSensorManager
+import java.lang.Math.sqrt
 import kotlin.math.abs
 
 class RecordingViewModel(application: Application)  : AndroidViewModel(application), SensorEventListener {
@@ -17,10 +18,8 @@ class RecordingViewModel(application: Application)  : AndroidViewModel(applicati
     private var boogieSensorManager: BoogieSensorManager
     private var _accelerometerContent: ObservableField<String> = ObservableField("")
     private var _jumps: ObservableInt = ObservableInt(0)
-    private var startJumpUp = false
-    private var endJumpUp = false
-    private var startJumpDown = false
-    private var endJumpDown = false
+    private var startMoviment = false
+    private var endMoviment = false
     private var _sumContent: ObservableField<String> = ObservableField("")
 
     private val _navigateToMainRecord = MutableLiveData<Boolean?>()
@@ -72,40 +71,26 @@ class RecordingViewModel(application: Application)  : AndroidViewModel(applicati
                     " Y:" +event?.values?.get(1).toString() +
                     " Z:" +event?.values?.get(2).toString())
 
+            var movimentPower = sqrt(event?.values?.get(0)!!.toDouble()*event?.values?.get(0)!!.toDouble() +
+                    event?.values?.get(1)!!.toDouble()*event?.values?.get(1)!!.toDouble() +
+                    event?.values?.get(2)!!.toDouble()*event?.values?.get(2)!!.toDouble())
 
-            _sumContent.set((abs(event?.values?.get(0)!!) +abs(event.values?.get(1)!!) + abs(event.values?.get(2)!!)).toString());
 
+            _sumContent.set(movimentPower.toString());
 
-            if (abs(event.values?.get(1)!!) > 11 && !startJumpUp) {
-                startJumpUp = true
-                Log.d("zzz0", event.values?.get(1).toString());
-                return;
+            if (movimentPower > 11 && !startMoviment) {
+                startMoviment = true
+                return
             }
 
-            if (abs(event.values?.get(1)!!) < 8 && startJumpUp && !endJumpUp) {
-                endJumpUp = true
-                Log.d("zzz1", event.values?.get(1).toString());
-                return;
-            }
+            if (movimentPower < 9 && startMoviment && !endMoviment) {
+                endMoviment = true
+             }
 
-            if (abs(event.values?.get(1)!!) > 11 && startJumpUp && endJumpUp && !startJumpDown) {
-                startJumpDown = true
-                Log.d("zzz2", event.values?.get(1).toString());
-                return;
-            }
-
-            if (abs(event.values?.get(1)!!) < 8 && startJumpUp && endJumpUp && startJumpDown && !endJumpDown) {
-                endJumpDown = true
-                Log.d("zzz3", event.values?.get(1).toString());
-            }
-
-            if (startJumpUp && endJumpUp && startJumpDown && endJumpDown) {
-                Log.d("jump", event.timestamp.toString());
+            if (startMoviment && endMoviment) {
                 _jumps.set(_jumps.get()+1)
-                startJumpUp = false
-                endJumpUp = false
-                startJumpDown = false
-                endJumpDown = false
+                startMoviment = false
+                endMoviment = false
             }
         }
     }
