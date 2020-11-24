@@ -18,6 +18,7 @@ class RecordingViewModel(application: Application)  : AndroidViewModel(applicati
     private var boogieSensorManager: BoogieSensorManager
     private var _accelerometerContent: ObservableField<String> = ObservableField("")
     private var _jumps: ObservableInt = ObservableInt(0)
+    private var _superDooperjumps: ObservableInt = ObservableInt(0)
     private var startMoviment = false
     private var endMoviment = false
     private var _sumContent: ObservableField<String> = ObservableField("")
@@ -40,6 +41,9 @@ class RecordingViewModel(application: Application)  : AndroidViewModel(applicati
 
     val jumpsContent : ObservableInt
         get() = _jumps
+
+    val superDooperJumpsContent : ObservableInt
+        get() = _superDooperjumps
 
     val sumContent : ObservableField<String>
         get() = _sumContent
@@ -75,22 +79,16 @@ class RecordingViewModel(application: Application)  : AndroidViewModel(applicati
                     event?.values?.get(1)!!.toDouble()*event?.values?.get(1)!!.toDouble() +
                     event?.values?.get(2)!!.toDouble()*event?.values?.get(2)!!.toDouble())
 
-
             _sumContent.set(movimentPower.toString());
 
-            if (movimentPower > 11 && !startMoviment) {
-                startMoviment = true
-                return
-            }
 
-            if (movimentPower < 9 && startMoviment && !endMoviment) {
-                endMoviment = true
-             }
-
-            if (startMoviment && endMoviment) {
-                _jumps.set(_jumps.get()+1)
-                startMoviment = false
-                endMoviment = false
+            if (movimentPower > 25 ) {
+                _jumps.set(_jumps.get()+10)
+                _superDooperjumps.set(_superDooperjumps.get()+1)
+            } else {
+                if (movimentPower > 11 || movimentPower < 9 ) {
+                    _jumps.set(_jumps.get()+1)
+                }
             }
         }
     }

@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="@string/jumps"
+            android:text="@string/boogies"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/time_jumping_content"/>
@@ -57,10 +57,32 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@{String.valueOf(recordingViewModel.jumpsContent)}"
-            android:textSize="80sp"
+            android:textSize="50sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/jumps_label"
+            tools:text="51" />
+
+        <TextView
+            android:id="@+id/superDooperJumps_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/superdooper_boogies"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/jumps_content"/>
+
+        <TextView
+            android:id="@+id/superDooperJumps_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@{String.valueOf(recordingViewModel.superDooperJumpsContent)}"
+            android:textSize="50sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/superDooperJumps_label"
             tools:text="51" />
 
         <TextView
@@ -71,7 +93,7 @@
             android:text="Sum"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/jumps_content" />
+            app:layout_constraintTop_toBottomOf="@+id/superDooperJumps_content" />
 
         <TextView
             android:id="@+id/sum_content"
@@ -79,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@{String.valueOf(recordingViewModel.sumContent)}"
-            android:textSize="80sp"
+            android:textSize="50sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sum_label"
