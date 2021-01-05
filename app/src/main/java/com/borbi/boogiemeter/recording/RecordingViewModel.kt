@@ -19,8 +19,6 @@ class RecordingViewModel(application: Application)  : AndroidViewModel(applicati
     private var _accelerometerContent: ObservableField<String> = ObservableField("")
     private var _jumps: ObservableInt = ObservableInt(0)
     private var _superDooperjumps: ObservableInt = ObservableInt(0)
-    private var startMoviment = false
-    private var endMoviment = false
     private var _sumContent: ObservableField<String> = ObservableField("")
 
     private val _navigateToMainRecord = MutableLiveData<Boolean?>()
