@@ -37,7 +37,7 @@ class EventFragment : Fragment() {
 
         binding.eventViewModel = viewModel
 
-        viewModel.navigateToRecording.observe(this, Observer {
+        viewModel.navigateToRecording.observe(viewLifecycleOwner, Observer {
             if (it == true) { // Observed state is true.
                 this.findNavController().navigate(EventFragmentDirections.actionEventFragmentToRecording())
                 viewModel.doneMoveToRecording()

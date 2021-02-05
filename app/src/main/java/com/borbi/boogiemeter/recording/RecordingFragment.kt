@@ -38,7 +38,7 @@ class RecordingFragment : Fragment() {
 
         binding.recordingViewModel = viewModel
 
-        viewModel.navigateToMainRecord.observe(this, Observer {
+        viewModel.navigateToMainRecord.observe(viewLifecycleOwner, Observer {
             if (it == true) { // Observed state is true.
                 this.findNavController().navigate(RecordingFragmentDirections.actionRecordingToSummaryFragment())
                 viewModel.doneMoveToMainRecord()

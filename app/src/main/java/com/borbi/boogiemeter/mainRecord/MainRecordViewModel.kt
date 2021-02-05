@@ -7,9 +7,13 @@ import androidx.lifecycle.ViewModel
 class MainRecordViewModel : ViewModel() {
 
     private val _navigateToEvent = MutableLiveData<Boolean?>()
+    private val _navigateToRecording = MutableLiveData<Boolean?>()
 
     val navigateToEvent: LiveData<Boolean?>
         get() = _navigateToEvent
+
+    val navigateToRecording: LiveData<Boolean?>
+        get() = _navigateToRecording
 
     fun moveToEvent() {
         _navigateToEvent.value = true
@@ -19,4 +23,12 @@ class MainRecordViewModel : ViewModel() {
         _navigateToEvent.value = false
     }
 
+    fun moveToRecording() {
+        _navigateToRecording.value = true
+    }
+
+    fun doneMoveToRecording() {
+        _navigateToRecording.value = false
+    }
+    
 }

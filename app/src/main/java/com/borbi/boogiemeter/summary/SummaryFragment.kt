@@ -30,7 +30,7 @@ class SummaryFragment : Fragment() {
 
         binding.summaryViewModel = viewModel
 
-        viewModel.navigateToMainRecord.observe(this, Observer {
+        viewModel.navigateToMainRecord.observe(viewLifecycleOwner, Observer {
             if (it == true) { // Observed state is true.
                 this.findNavController().navigate(SummaryFragmentDirections.actionSummaryFragmentToMainRecord())
                 viewModel.doneMoveToMainRecord()

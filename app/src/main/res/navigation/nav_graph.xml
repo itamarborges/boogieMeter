@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_mainRecord_to_eventFragment"
             app:destination="@id/eventFragment" />
+        <action
+            android:id="@+id/action_mainRecord_to_recording"
+            app:destination="@id/recording" />
     </fragment>
     <fragment
         android:id="@+id/recording"

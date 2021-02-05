@@ -30,10 +30,17 @@ class MainRecordFragment : Fragment() {
 
         binding.mainRecordViewModel = viewModel
 
-        viewModel.navigateToEvent.observe(this, Observer {
+        viewModel.navigateToEvent.observe(viewLifecycleOwner, Observer {
             if (it == true) { // Observed state is true.
                 this.findNavController().navigate(MainRecordFragmentDirections.actionMainRecordToEventFragment())
                 viewModel.doneMoveToEvent()
+            }
+        })
+
+        viewModel.navigateToRecording.observe(viewLifecycleOwner, Observer {
+            if (it == true) { // Observed state is true.
+                this.findNavController().navigate(MainRecordFragmentDirections.actionMainRecordToRecording())
+                viewModel.doneMoveToRecording()
             }
         })
 
