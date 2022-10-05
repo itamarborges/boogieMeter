@@ -5,8 +5,8 @@
 
     <data>
         <variable
-        name="eventViewModel"
-        type="com.borbi.boogiemeter.event.EventViewModel" />
+        name="gigViewModel"
+        type="com.borbi.boogiemeter.gig.GigViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -98,7 +98,7 @@
             android:layout_marginBottom="32dp"
             android:background="#CDDC39"
             android:text="@string/start_recording"
-            android:onClick="@{() -> eventViewModel.moveToRecording()}"
+            android:onClick="@{() -> gigViewModel.moveToRecording()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

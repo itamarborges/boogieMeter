@@ -3,15 +3,11 @@ package com.borbi.boogiemeter.sensors
 import android.app.Application
 import android.content.Context
 import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.util.Log
-import androidx.core.content.ContextCompat.getSystemService
 
 class BoogieSensorManager(application: Application) {
 
-    public var sensorManager: SensorManager
+    var sensorManager: SensorManager
     var sensorGyroscope: Sensor? = null
     var sensorAccelerometer: Sensor? = null
 

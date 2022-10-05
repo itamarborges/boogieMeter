@@ -1,9 +1,12 @@
-package com.borbi.boogiemeter.event
+package com.borbi.boogiemeter.gig
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.borbi.boogiemeter.database.GigDao
 
-class EventViewModel(application: Application)  : AndroidViewModel(application) {
+class GigViewModel(
+        val database: GigDao,
+        application: Application)  : AndroidViewModel(application) {
 
     private val _navigateToRecording = MutableLiveData<Boolean?>()
 
@@ -18,15 +21,13 @@ class EventViewModel(application: Application)  : AndroidViewModel(application) 
         _navigateToRecording.value = false
     }
 
-    override fun onCleared() {
-        super.onCleared()
-    }
-
-    class Factory(val app: Application) : ViewModelProvider.Factory {
+    class Factory(
+            private val dataSource: GigDao,
+            private val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(EventViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(GigViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return EventViewModel(app) as T
+                return GigViewModel(dataSource, app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

@@ -5,15 +5,16 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.*
+import com.borbi.boogiemeter.database.BoogieTimelineDao
 import com.borbi.boogiemeter.sensors.BoogieSensorManager
 import java.lang.Math.sqrt
-import kotlin.math.abs
 
-class RecordingViewModel(application: Application)  : AndroidViewModel(application), SensorEventListener {
+class RecordingViewModel(
+        val database: BoogieTimelineDao,
+        application: Application)  : AndroidViewModel(application), SensorEventListener {
 
     private var boogieSensorManager: BoogieSensorManager
     private var _accelerometerContent: ObservableField<String> = ObservableField("")
@@ -73,11 +74,11 @@ class RecordingViewModel(application: Application)  : AndroidViewModel(applicati
                     " Y:" +event?.values?.get(1).toString() +
                     " Z:" +event?.values?.get(2).toString())
 
-            var movimentPower = sqrt(event?.values?.get(0)!!.toDouble()*event?.values?.get(0)!!.toDouble() +
-                    event?.values?.get(1)!!.toDouble()*event?.values?.get(1)!!.toDouble() +
-                    event?.values?.get(2)!!.toDouble()*event?.values?.get(2)!!.toDouble())
+            var movimentPower = sqrt(event?.values?.get(0)!!.toDouble()*event.values?.get(0)!!.toDouble() +
+                    event.values?.get(1)!!.toDouble()*event.values?.get(1)!!.toDouble() +
+                    event.values?.get(2)!!.toDouble()*event.values?.get(2)!!.toDouble())
 
-            _sumContent.set(movimentPower.toString());
+            _sumContent.set(movimentPower.toString())
 
 
             if (movimentPower > 25 ) {
@@ -91,11 +92,13 @@ class RecordingViewModel(application: Application)  : AndroidViewModel(applicati
         }
     }
 
-    class Factory(val app: Application) : ViewModelProvider.Factory {
+    class Factory(
+            private val dataSource: BoogieTimelineDao,
+            private val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(RecordingViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return RecordingViewModel(app) as T
+                return RecordingViewModel(dataSource, app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
